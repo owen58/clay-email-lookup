@@ -47,5 +47,12 @@ def lookup():
         print(f'Clay webhook error: {e}')
         return jsonify({'error': 'Failed to contact Clay'}), 502
 
+@app.route('/api/results', methods=['POST'])
+def receive_results():
+    """Endpoint for Clay to POST results back"""
+    data = request.get_json()
+    print(f'Received from Clay: {data}')
+    return jsonify({'success': True})
+
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
